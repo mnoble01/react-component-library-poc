@@ -6,7 +6,8 @@
     ".": {
       "types": "./dist/**/*.d.ts",
       "import": "./dist/**/*.js"
-    }
+    },
+    "./**/*.css": "./dist/**/*.css"
   },
   "scripts": {
     "dev": "vite",
