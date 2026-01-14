@@ -13,13 +13,13 @@ function App() {
           onClick={() => console.log('Rslib Primary Button Clicked')}
         />
       </div>
-      <h1>Rslib Component Library</h1>
+      {/* <h1>Rslib Component Library</h1>
       <div className="card">
         <RslibButton
           type="primary"
           label="Rslib Primary Button"
           onClick={() => console.log('Rslib Primary Button Clicked')}
-        />
+        /> */}
       </div>
     </>
   )
