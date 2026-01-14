@@ -9,9 +9,10 @@ console.log(glob.sync('./src/**/*.{ts,tsx}'));
 export default defineConfig({
   plugins: [react()],
   build: {
+    cssCodeSplit: true,
     lib: {
       entry: Object.fromEntries(
-        glob.sync('./src/components/*.{ts,tsx}').map((file) => {
+        glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
           // This removes `src/` as well as the file extension from each
           // file, so e.g. src/nested/foo.js becomes nested/foo
           return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
