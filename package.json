@@ -1,0 +1,12 @@
+{
+  "name": "react-component-library-poc",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "vite-component-library",
+    "rslib-component-library"
+  ],
+  "volta": {
+    "node": "20.19.0"
+  }
+}
