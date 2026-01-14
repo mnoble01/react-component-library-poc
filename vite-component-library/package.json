@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    ".": {
+    "./*": {
       "types": "./dist/**/*.d.ts",
       "import": "./dist/**/*.js"
-    },
-    "./**/*.css": "./dist/**/*.css"
+    }
   },
   "scripts": {
     "dev": "vite",
