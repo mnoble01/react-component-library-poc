@@ -1,5 +1,5 @@
 {
-  "name": "rslib-component-library",
+  "name": "@mnoble01/rslib-component-library",
   "version": "1.0.0",
   "type": "module",
   "exports": {
@@ -49,5 +49,7 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
-  "private": true
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/mnoble01"
+  }
 }
