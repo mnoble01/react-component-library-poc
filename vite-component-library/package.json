@@ -1,6 +1,5 @@
 {
-  "name": "vite-component-library",
-  "private": true,
+  "name": "@mnoble01/vite-component-library",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -33,5 +32,9 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/mnoble01"
+  },
+  "repository": "github:mnoble01/react-component-library-poc"
 }
