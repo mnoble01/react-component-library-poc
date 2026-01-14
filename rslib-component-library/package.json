@@ -51,5 +51,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/mnoble01"
-  }
+  },
+  "repository": "github:mnoble01/react-component-library-poc"
 }
