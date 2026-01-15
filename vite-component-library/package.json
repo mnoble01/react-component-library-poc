@@ -1,6 +1,6 @@
 {
   "name": "@mnoble01/vite-component-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "exports": {
     "./*": {
@@ -33,7 +33,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-libcss": "^1.1.2"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/mnoble01"
