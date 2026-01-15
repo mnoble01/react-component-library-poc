@@ -1,11 +1,11 @@
 {
-  "name": "rslib-component-library",
+  "name": "@mnoble01/rslib-component-library",
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/**/*.d.ts",
-      "import": "./dist/**/*.js"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
     }
   },
   "types": "./dist/index.d.ts",
@@ -19,7 +19,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "storybook": "storybook dev",
-    "test": "rstest"
+    "test": "rstest",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -49,5 +50,8 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
-  "private": true
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/mnoble01"
+  },
+  "repository": "github:mnoble01/react-component-library-poc"
 }
