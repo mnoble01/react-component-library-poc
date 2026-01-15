@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@mnoble01/rslib-component-library": "^1.0.0",
-    "@mnoble01/vite-component-library": "^1.0.0",
+    "@mnoble01/vite-component-library": "^1.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
