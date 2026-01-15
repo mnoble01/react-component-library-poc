@@ -1,7 +1,6 @@
 {
   "name": "@mnoble01/vite-component-library",
   "version": "1.0.1",
-  "description": "Include type declarations",
   "type": "module",
   "exports": {
     "./*": {
