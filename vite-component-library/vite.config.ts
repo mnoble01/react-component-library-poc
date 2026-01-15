@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { glob } from 'glob'
 import { fileURLToPath } from 'node:url'
+import dts from 'vite-plugin-dts'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts({ tsconfigPath: "./tsconfig.app.json", entryRoot: './src', include: './src/components' })],
   build: {
     cssCodeSplit: true,
     lib: {
