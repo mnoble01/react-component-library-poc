@@ -1,13 +1,23 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'node:path'
-import { glob } from 'glob'
-import { fileURLToPath } from 'node:url'
-import dts from 'vite-plugin-dts'
+/// <reference types="vitest/config" />
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'node:path';
+import { glob } from 'glob';
+import { fileURLToPath } from 'node:url';
+import dts from 'vite-plugin-dts';
 
 // https://vite.dev/config/
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import { playwright } from '@vitest/browser-playwright';
+const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+
+// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [react(), dts({ tsconfigPath: "./tsconfig.app.json", entryRoot: './src', include: './src/components' })],
+  plugins: [react(), dts({
+    tsconfigPath: "./tsconfig.app.json",
+    entryRoot: './src',
+    include: './src/components'
+  })],
   build: {
     cssCodeSplit: true,
     lib: {
@@ -16,20 +26,17 @@ export default defineConfig({
       // "If you want to convert a set of files to another format while maintaining the file structure and export signatures, 
       // the recommended way—instead of using output.preserveModules that may tree-shake exports as well as emit virtual files 
       // created by plugins—is to turn every file into an entry point." - https://rollupjs.org/configuration-options/#input 
-      entry: Object.fromEntries(
-        glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
-          // This removes `src/` as well as the file extension from each
-          // file, so e.g. src/nested/foo.js becomes nested/foo
-          return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
-            // This expands the relative paths to absolute paths, so e.g.
-            // src/nested/foo becomes /project/src/nested/foo.js
-            fileURLToPath(new URL(file, import.meta.url))
-          ];
-        })
-      ),
+      entry: Object.fromEntries(glob.sync('./src/components/*.{ts,tsx,css}').map(file => {
+        // This removes `src/` as well as the file extension from each
+        // file, so e.g. src/nested/foo.js becomes nested/foo
+        return [path.relative('src', file.slice(0, file.length - path.extname(file).length)),
+        // This expands the relative paths to absolute paths, so e.g.
+        // src/nested/foo becomes /project/src/nested/foo.js
+        fileURLToPath(new URL(file, import.meta.url))];
+      })),
       // Option 2: Using the following glob requires setting preserveModules=true, preserveModulesRoot='src' below
       // entry: glob.sync('./src/components/*.{ts,tsx,css}'),
-      formats: ['es'],
+      formats: ['es']
     },
     rollupOptions: {
       // The following prevents bundling react into the library build
@@ -38,7 +45,30 @@ export default defineConfig({
         // Enable for Option 2 above:
         // preserveModules: true,
         // preserveModulesRoot: 'src',
-      },
-    },
+      }
+    }
   },
-})
+  test: {
+    projects: [{
+      extends: true,
+      plugins: [
+      // The plugin will run tests for the stories defined in your Storybook config
+      // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+      storybookTest({
+        configDir: path.join(dirname, '.storybook')
+      })],
+      test: {
+        name: 'storybook',
+        browser: {
+          enabled: true,
+          headless: true,
+          provider: playwright({}),
+          instances: [{
+            browser: 'chromium'
+          }]
+        },
+        setupFiles: ['.storybook/vitest.setup.ts']
+      }
+    }]
+  }
+});
