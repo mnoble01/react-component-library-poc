@@ -1,5 +1,6 @@
 import { describe, expect, it, rs } from '@rstest/core';
 import { render, screen } from '@testing-library/react';
+// import { render } from '@rstest/browser-react'; // This import does not work
 import userEvent from '@testing-library/user-event';
 import Button from '../src/components/Button';
 
