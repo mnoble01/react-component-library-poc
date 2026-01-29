@@ -1,19 +1,19 @@
 {
-  "name": "vite-component-library",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@mnoble01/vite-component-library",
+  "version": "1.0.2",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/**/*.d.ts",
-      "import": "./dist/**/*.js"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
     }
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -33,6 +33,11 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.5.4"
-  }
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-libcss": "^1.1.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/mnoble01"
+  },
+  "repository": "github:mnoble01/react-component-library-poc"
 }
