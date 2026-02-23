@@ -1,0 +1,27 @@
+@value aji300: #ccd4d7;
+@value brand500: #53baea;
+@value covincho500: #dd3352;
+
+.button {
+  border: 1px solid;
+}
+
+.primary {
+  background-color: brand500;
+  border-color: brand500;
+}
+
+.secondary {
+  background-color: white;
+  border-color: aji300;
+}
+
+.tertiary {
+  background-color: white;
+  border-color: transparent;
+}
+
+.destructive {
+  background-color: covincho500;
+  border-color: covincho500;
+}

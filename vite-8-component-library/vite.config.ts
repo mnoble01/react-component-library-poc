@@ -1,0 +1,53 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import path from 'node:path'
+import { glob } from 'glob'
+import { fileURLToPath } from 'node:url'
+import dts from 'vite-plugin-dts'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), dts({ tsconfigPath: "./tsconfig.app.json", entryRoot: './src', include: './src/components' })],
+  build: {
+    cssCodeSplit: true,
+    // `lib` configuration didn't work with Rolldown, so I moved the options down to `rolldownOptions`
+    lib: {
+      // "If you want to convert a set of files to another format while maintaining the file structure and export signatures, 
+      // the recommended way—instead of using output.preserveModules that may tree-shake exports as well as emit virtual files 
+      // created by plugins—is to turn every file into an entry point." - https://rollupjs.org/configuration-options/#input 
+      entry: Object.fromEntries(
+        glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
+          // This removes `src/` as well as the file extension from each
+          // file, so e.g. src/nested/foo.js becomes nested/foo
+          return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
+            // This expands the relative paths to absolute paths, so e.g.
+            // src/nested/foo becomes /project/src/nested/foo.js
+            fileURLToPath(new URL(file, import.meta.url))
+          ];
+        })
+      ),
+      formats: ['es'],
+    },
+    rolldownOptions: {
+    //   input: Object.fromEntries(
+    //     glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
+    //       // This removes `src/` as well as the file extension from each
+    //       // file, so e.g. src/nested/foo.js becomes nested/foo
+    //       return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
+    //         // This expands the relative paths to absolute paths, so e.g.
+    //         // src/nested/foo becomes /project/src/nested/foo.js
+    //         fileURLToPath(new URL(file, import.meta.url))
+    //       ];
+    //     })
+    //   ),
+    //   output: {
+    //     format: 'es',
+    //   },
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'react-dom/client'],
+    },
+    // rollupOptions: {
+    //   // The following prevents bundling react into the library build
+    //   external: ['react', 'react-dom', 'react/jsx-runtime', 'react-dom/client'],
+    // },
+  },
+})
