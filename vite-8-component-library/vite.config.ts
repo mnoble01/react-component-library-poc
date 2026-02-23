@@ -11,25 +11,11 @@ export default defineConfig({
   build: {
     cssCodeSplit: true,
     // `lib` configuration didn't work with Rolldown, so I moved the options down to `rolldownOptions`
-    // lib: {
-    //   // "If you want to convert a set of files to another format while maintaining the file structure and export signatures, 
-    //   // the recommended way—instead of using output.preserveModules that may tree-shake exports as well as emit virtual files 
-    //   // created by plugins—is to turn every file into an entry point." - https://rollupjs.org/configuration-options/#input 
-    //   entry: Object.fromEntries(
-    //     glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
-    //       // This removes `src/` as well as the file extension from each
-    //       // file, so e.g. src/nested/foo.js becomes nested/foo
-    //       return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
-    //         // This expands the relative paths to absolute paths, so e.g.
-    //         // src/nested/foo becomes /project/src/nested/foo.js
-    //         fileURLToPath(new URL(file, import.meta.url))
-    //       ];
-    //     })
-    //   ),
-    //   formats: ['es'],
-    // },
-    rolldownOptions: {
-      input: Object.fromEntries(
+    lib: {
+      // "If you want to convert a set of files to another format while maintaining the file structure and export signatures, 
+      // the recommended way—instead of using output.preserveModules that may tree-shake exports as well as emit virtual files 
+      // created by plugins—is to turn every file into an entry point." - https://rollupjs.org/configuration-options/#input 
+      entry: Object.fromEntries(
         glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
           // This removes `src/` as well as the file extension from each
           // file, so e.g. src/nested/foo.js becomes nested/foo
@@ -40,9 +26,23 @@ export default defineConfig({
           ];
         })
       ),
-      output: {
-        format: 'es',
-      },
+      formats: ['es'],
+    },
+    rolldownOptions: {
+    //   input: Object.fromEntries(
+    //     glob.sync('./src/components/*.{ts,tsx,css}').map((file) => {
+    //       // This removes `src/` as well as the file extension from each
+    //       // file, so e.g. src/nested/foo.js becomes nested/foo
+    //       return [path.relative('src', file.slice(0, file.length - path.extname(file).length)), 
+    //         // This expands the relative paths to absolute paths, so e.g.
+    //         // src/nested/foo becomes /project/src/nested/foo.js
+    //         fileURLToPath(new URL(file, import.meta.url))
+    //       ];
+    //     })
+    //   ),
+    //   output: {
+    //     format: 'es',
+    //   },
       external: ['react', 'react-dom', 'react/jsx-runtime', 'react-dom/client'],
     },
     // rollupOptions: {
