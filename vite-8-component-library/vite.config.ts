@@ -44,6 +44,9 @@ export default defineConfig({
     //     format: 'es',
     //   },
       external: ['react', 'react-dom', 'react/jsx-runtime', 'react-dom/client'],
+      transform: {
+        jsx: 'preserve',
+      }
     },
     // rollupOptions: {
     //   // The following prevents bundling react into the library build
