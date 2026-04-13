@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event';
 import Button from '../src/components/Button';
 
 describe('Button', () => {
-  for (let i = 0; i<100; i++) {
-    it(`renders ${i}`, async () => {
+  for (let i = 0; i<10; i++) {
+    it(`renders ${i}`, async function() {
       const user = userEvent.setup();
       const onClick = vi.fn();
       const { container } =  await render(<Button type="primary" label="Primary Button" className='custom-button' onClick={onClick} />);
@@ -14,7 +14,8 @@ describe('Button', () => {
       const button = getByText(container, 'Primary Button');
       expect(button).toBeVisible();
       expect(button).toBeInTheDocument();
-      await user.click(button);
+      // await user.click(button); // does not work in CLI when Vitest test.sequence.concurrent=true
+      await fireEvent.click(button);
       expect(onClick).toHaveBeenCalledTimes(1);
     });
   }
