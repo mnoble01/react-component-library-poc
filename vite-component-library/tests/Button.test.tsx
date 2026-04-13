@@ -4,9 +4,8 @@ import { describe, expect, test, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import Button from '../src/components/Button';
 
-
 describe('Button', () => {
-  for (let i = 0; i<10; i++) {
+  for (let i = 0; i<100; i++) {
     it(`renders ${i}`, async () => {
       const user = userEvent.setup();
       const onClick = vi.fn();
