@@ -41,4 +41,9 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    sequence: {
+      concurrent: true,
+    },
+  }
 })

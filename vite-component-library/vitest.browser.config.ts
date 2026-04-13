@@ -13,5 +13,8 @@ export default defineConfig({
         { browser: 'chromium' },
       ],
     },
+    sequence: {
+      concurrent: true,
+    },
   },
 })
