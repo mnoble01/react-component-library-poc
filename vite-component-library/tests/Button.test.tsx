@@ -10,7 +10,7 @@ describe('Button', () => {
     it(`renders ${i}`, async () => {
       const user = userEvent.setup();
       const onClick = vi.fn();
-      const { container } =  render(<Button type="primary" label="Primary Button" className='custom-button' onClick={onClick} />);
+      const { container } =  await render(<Button type="primary" label="Primary Button" className='custom-button' onClick={onClick} />);
       
       const button = getByText(container, 'Primary Button');
       expect(button).toBeVisible();
